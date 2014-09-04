@@ -1,6 +1,6 @@
 (1) Copy (in assembly language) the SINGLE INSTRUCTION 
     that copies a character from the buffer array into a register.
-
+sample answer
 
 (2) Copy the SINGLE INSTRUCTION that branches OUT OF THE LOOP 
     under the condition that the current character is '\n'
