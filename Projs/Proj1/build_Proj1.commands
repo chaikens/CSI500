@@ -1,0 +1,4 @@
+gcc -g -pthread -c csapp.c
+gcc -g -c Proj1.c
+gcc -g -c Proj1ListUtils.c
+gcc -pthread -o Proj1 Proj1.o Proj1ListUtils.o csapp.o

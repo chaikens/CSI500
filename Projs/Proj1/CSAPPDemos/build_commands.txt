@@ -1,0 +1,6 @@
+
+gcc -c -g csapp.c
+gcc -c -g fork.c
+gcc -o fork -pthread fork.o csapp.o
+gcc -c -g shellex.c
+gcc -o shellex -pthread shellex.o csapp.o
