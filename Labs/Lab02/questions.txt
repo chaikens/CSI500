@@ -1,0 +1,16 @@
+(1) Copy (in assembly language) the SINGLE INSTRUCTION 
+    that copies a character from the buffer array into a register.
+sample answer
+
+(2) Copy the SINGLE INSTRUCTION that branches OUT OF THE LOOP 
+    under the condition that the current character is '\n'
+
+
+(3) Copy the SINGLE INSTRUCTION that adds 2 to the ASCII code 
+    of the current character, presently in a register.
+
+
+(4) Copy the SINGLE INSTRUCTION that copies the code for the character 
+    two after the current into one byte of the buffer.
+
+
