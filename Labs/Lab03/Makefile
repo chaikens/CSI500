@@ -15,9 +15,10 @@
 #
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(MAKECMDGOALS),help)
 include dot.config
 endif
-
+endif
 
 CONF=${CONFIG_VOLATILE}${CONFIG_OPT}
 
