@@ -4,10 +4,10 @@
 volatile
 #endif 
 int sharedInt;
-/* ring has static lifetime.
-   ring is initialized in racer.c
+/* sharedInt has static lifetime.
+   sharedInt is initialized in racer.c
    All the new threads run racer so
-   they all share ring.
+   they all share sharedInt.
 */
 
 void * racer( void * arg );
