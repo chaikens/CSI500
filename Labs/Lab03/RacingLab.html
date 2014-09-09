@@ -1,68 +1,118 @@
+<?xml version="1.0" encoding="windows-1252"?>
 <!--?xml version="1.0" encoding="iso-8859-1"?-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
   <title>RacingLab</title>
-  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/">
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
 </head>
 
 <body>
 <h1>Introduction to Racing Threads Lab.</h1>
 <ol>
-  <li>Make sure that you have a directory exclusively for CSI500/400. That was
-    done in Lab 01. Ask somebody for help if you didn't do that yet. "Go to "
-    that CSI500 directory. That means, "make your shell's <strong>working
-    directory</strong> become that course directory". Use the <code>pwd</code>
-    command to make sure your "going to that directory" succeeded. (Useful
-    commands: <code>mkdir,</code> &nbsp;&nbsp;<code>cd,</code> &nbsp;&nbsp;&nbsp;<code>ls -l,
-    pwd&nbsp;</code>) 
-    <p>Our plan is to have you download a file named <code>L02.tar</code>
-    <strong>into </strong>your OS Course directory and then unpack the archive.
-    The unpacking operation <strong>will create for you</strong> a new
-    directory named <code>L02</code> and <code></code>put in it some files and
-    some subdirectories.<code></code></p>
+  <li>Go into your <code><strong>CSI500</strong></code> directory that should
+    contain our CSI500 git repository which you started with <code><strong>git
+    clone git@github.com:chaikens/CSI500</strong></code>, and which you added
+    to during previous labs. Do the command below: 
+    <p><pre><strong>git pull origin master</strong></pre>
+    </p>
+    <p>A text editor might take over your terminal window with a comment about
+    this being a merge. Just exit the editor. By default it will be the vi
+    editor, and the commands to simply exit without changing any text are
+    <code><strong>ESC :wq </strong></code>hh(That's the Excape key first. The
+    ESC stops text edit mode and <code><strong>:wq</strong></code> tells it to
+    write out the file and then quit.)</p>
   </li>
-  <li>Note: the files for starting this lab are visible from <a href="http://www.cs.albany.edu/%7Esdc/CSI500/Fal11/Labs/L02"><code>http://www.cs.albany.edu/~sdc/CSI500/Fal11/Labs/L02</code></a></li>
-  <li>Download all of today's lab files together by downloading ONE ".tar"
-    (Unix tape-archive) file from the Web. The URL is <a href="http://www.cs.albany.edu/%7Esdc/CSI500/Fal11/Labs/L02.tar"><code>http://www.cs.albany.edu/~sdc/CSI500/Fal11/Labs/L02.tar</code></a></li>
-  <li>Give the command <code>tar xvf L02.tar</code> Q1: Write in your notebook
-    HOW MANY DIFFERENT FILES were unpacked into the new L02 directory by this
-    tar command. Don't count files in subdirectories.</li>
-  <li>"Go To" the new <code>L02</code> directory that tar just made. List its
-    contents, because Q2 is to write down the names of all the files that will
-    be "made" by make. Now run the command: <code>make</code> 
-    <p><code></code>Q2: Write in your notebook the names of all the files that
-    were just made.<code></code></p>
+  <li>Make your shell change working directory to
+    <code><strong>Labs/Lab03</strong></code> (Remember
+    <code><strong>cwd</strong></code>) and use <code><strong>ls -l
+    </strong></code> to see what we gave you. WRITE IN YOUR NOTES, or better,
+    KEEP A COPY OF the files listed BEFORE you proceed with making the software
+    by commanding: <code><strong>ls -l &gt; files_before_making
+    </strong></code>(The <code><strong>&gt; </strong></code>symbol in this
+    shell command tells the shell to open a disk file
+    named<code><strong>files_before_making</strong></code> and redirect the
+    standard output file descriptor so it describes this disk file instead of
+    the text terminal.) 
+    <p>We will ask you to report what new files are commanded to be made by the
+    <code><strong>Makefile</strong></code>. You should only pay attention to
+    the files at the top level of directory
+    <code><strong>Lab03</strong></code>, not any in the subdirectories.</p>
   </li>
-  <li>Run the new raceDriver program with .<code>/raceDriver</code> 
-    <p>Q3: Write in your notebook the failing condition that I programmed into
-    <code>raceDriver.c</code> to make it print the error message that you
-    saw.</p>
+  <li>View in your text editor 
+    <p>first <code><strong>racer.c</strong></code>: It has a loop that makes
+    the thread repeatedly add 1 to a shared variable in memory (apparently).
+    </p>
+    <p>second, <code><strong>racer.h</strong></code>: The interface to the
+    racer function.</p>
+    <p>third, <code><strong>raceDriver.c</strong></code>: Don't spend time
+    studying it all now, but note that the <code><strong>racer</strong></code>
+    function is NOT CALLED EXPLICITLY with
+    <code><strong>racer(</strong></code>ANYTHING<code><strong>);</strong></code>
+    but rather its name is one argument in the POSIX call to create a thread
+    and get it to run the <code><strong>racer</strong></code> loop.</p>
+    <p><pre><strong> pthread_create(&amp;threads[i], NULL, racer, (void *) i);</strong></pre>
+    </p>
+    <p style="margin-left:2em;"><span style="font-size: 10pt">Important C rule
+    in kernel programming: The plain name of a function, with no ()'s, denotes
+    the address of the first machine instruction of the function's body. In
+    other words, the name denotes the function pointer pointing to that
+    function. (Note this rule is similar to the one about arrays: The plain
+    name denotes the address of the first element and the name followed by
+    [ANYTHING] denotes the variable that happens to be the array element with
+    index given by the value denoted by ANYTHING.)</span> </p>
   </li>
-  <li>Start the <code>script&nbsp;&nbsp;&nbsp;</code>command by typing <code>script.</code>
-    <code>&nbsp;</code>Everything you see on the terminal window will be saved in a
+  <li>Command: <code><strong>make help </strong></code>(When you
+    <strong><code>make help</code> </strong>at the top of a Linux kernel source
+    tree, you get instructions like this.)<strong></strong></li>
+  <li>Command: <code><strong>make config</strong></code> Leave the contents of
+    the editor buffer unchanged by typing <code><strong>C-x</strong></code>
+    Next, command: <code><strong>make </strong>(<strong>make
+    </strong></code>some kind of configuration followed by <code><strong>make
+    </strong></code>what you want is the common pattern that people who build
+    kernels do day-to-day.)</li>
+  <li>LAB Q1: Write in the file
+    <code><strong>Q1_files_just_made</strong></code> the names of the files
+    (top level only) made during the last step. Command: <code><strong>git add
+    Q1_files_just_made</strong></code> and <strong><code>git commit -m "Did the
+    first make and answered Q1"</code></strong> Finally, command:
+    <strong><code>git log -p</code></strong></li>
+  <li>LAB Q2: Write in file
+    <code><strong><code>Q2</code></strong></code><code><strong>_calling_raceDriver</strong></code>
+    the failing condition that I programmed into
+    <code><strong>raceDriver.c</strong></code> to make it print the error
+    message that you saw. Git add and commit as usual.</li>
+</ol>
+
+<p>OLD TEXT IS BELOW..WILL BE REVISED BEFORE THE LAB BEGINS.</p>
+<ol>
+  <li>Run the new raceDriver program with .<code>/raceDriver</code> </li>
+  <li>Start the <code>script   </code>command by typing <code>script.</code>
+    <code> </code>Everything you see on the terminal window will be saved in a
     file named <code>typescript</code> until you type <code>control-d
     </code>That way, your experiments and their outputs will be in a file you
     can study later and add to your lab report.<code></code></li>
-  <li>Now run 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 1</code> 
-    <p>and then 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 2</code></p>
-    <p>and finally 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 10</code></p>
+  <li>Now run 3 times    <code>time ./raceDriver 1</code> 
+    <p>and then 3 times    <code>time ./raceDriver 2</code></p>
+    <p>and finally 3 times    <code>time ./raceDriver 10</code></p>
   </li>
   <li>Now we'll build the software with full compiler optimization. In the
     remainder of the instructions, "<code>OPT</code>" is spelled with
     Capital-letter O (Oh), <strong>not zero</strong>. "<code>=-O3</code>" is
     spelled equal sign, hyphen, Capital-letter O and number 3. Optimization
     options given to the compiler start with letter O, for Optimization!</li>
-  <li>Give the command <code>make OPT=-O3&nbsp;&nbsp;&nbsp;&nbsp;</code>and then: 
-    <p>run 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3 1 </code></p>
-    <p>and then 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3 2</code></p>
-    <p>and finally 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3
+  <li>Give the command <code>make OPT=-O3    </code>and then: 
+    <p>run 3 times    <code>time ./raceDriver-O3 1 </code></p>
+    <p>and then 3 times    <code>time ./raceDriver-O3 2</code></p>
+    <p>and finally 3 times    <code>time ./raceDriver-O3
     10</code><code></code></p>
   </li>
   <li>Exit the script recorder with Control-<code>d</code></li>
   <li>Q4A: Study the racer.s file (together with racer.c) and write into your
     notebook the assembly language instructions that together work to add 1 to
-    the global variable <code>ring</code>.</li>
+    the global variable <code>sharedInt</code>.</li>
   <li>Now, command <code>make config </code>and follow the directions to
     COMMENT OUT whole <code>#define </code>line.<code></code></li>
   <li>Run <code>make </code>(you will be asked to run make OPT=-O3 again when
@@ -73,12 +123,12 @@
   <li>Questions now:</li>
   <li>Q4B: Study the <code>racer.s</code> file (together with racer.c) and
     write into your notebook the assembly language instructions that together
-    work to add 1 to the global variable <code>ring</code>.</li>
+    work to add 1 to the global variable <code>sharedInt</code>.</li>
   <li>Q5: Study the <code>racer-O3.s</code> file to figure out why the
     optimized, non-volatile version was (A) so fast and (B) showed no errors at
     all because of the race condition. (C) How did the optimizing compiler make
-    the computer add 1 to <code>ring</code> 20 million times?</li>
-  <li>Q6: List in your notebook the C-functions that were used in racedriver.c
+    the computer add 1 to <code>sharedInt</code> 20 million times?</li>
+  <li>Q6: List in your notebook the C-functions that were used in raceDriver.c
     to deal with pthreads. Do some web searching and write in your notebook
     where you can learn exactly how to use those functions, together with
     <code>pthread_mutex_init</code>, <code>pthread_mutex_lock</code> and
@@ -96,6 +146,5 @@
     <p style="font-size: 8pt">(revised 9/4/2012)</p>
   </li>
 </ol>
-
-
-</body></html>
+</body>
+</html>
