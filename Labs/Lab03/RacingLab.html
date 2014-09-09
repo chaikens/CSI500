@@ -1,0 +1,101 @@
+<!--?xml version="1.0" encoding="iso-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  <title>RacingLab</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/">
+</head>
+
+<body>
+<h1>Introduction to Racing Threads Lab.</h1>
+<ol>
+  <li>Make sure that you have a directory exclusively for CSI500/400. That was
+    done in Lab 01. Ask somebody for help if you didn't do that yet. "Go to "
+    that CSI500 directory. That means, "make your shell's <strong>working
+    directory</strong> become that course directory". Use the <code>pwd</code>
+    command to make sure your "going to that directory" succeeded. (Useful
+    commands: <code>mkdir,</code> &nbsp;&nbsp;<code>cd,</code> &nbsp;&nbsp;&nbsp;<code>ls -l,
+    pwd&nbsp;</code>) 
+    <p>Our plan is to have you download a file named <code>L02.tar</code>
+    <strong>into </strong>your OS Course directory and then unpack the archive.
+    The unpacking operation <strong>will create for you</strong> a new
+    directory named <code>L02</code> and <code></code>put in it some files and
+    some subdirectories.<code></code></p>
+  </li>
+  <li>Note: the files for starting this lab are visible from <a href="http://www.cs.albany.edu/%7Esdc/CSI500/Fal11/Labs/L02"><code>http://www.cs.albany.edu/~sdc/CSI500/Fal11/Labs/L02</code></a></li>
+  <li>Download all of today's lab files together by downloading ONE ".tar"
+    (Unix tape-archive) file from the Web. The URL is <a href="http://www.cs.albany.edu/%7Esdc/CSI500/Fal11/Labs/L02.tar"><code>http://www.cs.albany.edu/~sdc/CSI500/Fal11/Labs/L02.tar</code></a></li>
+  <li>Give the command <code>tar xvf L02.tar</code> Q1: Write in your notebook
+    HOW MANY DIFFERENT FILES were unpacked into the new L02 directory by this
+    tar command. Don't count files in subdirectories.</li>
+  <li>"Go To" the new <code>L02</code> directory that tar just made. List its
+    contents, because Q2 is to write down the names of all the files that will
+    be "made" by make. Now run the command: <code>make</code> 
+    <p><code></code>Q2: Write in your notebook the names of all the files that
+    were just made.<code></code></p>
+  </li>
+  <li>Run the new raceDriver program with .<code>/raceDriver</code> 
+    <p>Q3: Write in your notebook the failing condition that I programmed into
+    <code>raceDriver.c</code> to make it print the error message that you
+    saw.</p>
+  </li>
+  <li>Start the <code>script&nbsp;&nbsp;&nbsp;</code>command by typing <code>script.</code>
+    <code>&nbsp;</code>Everything you see on the terminal window will be saved in a
+    file named <code>typescript</code> until you type <code>control-d
+    </code>That way, your experiments and their outputs will be in a file you
+    can study later and add to your lab report.<code></code></li>
+  <li>Now run 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 1</code> 
+    <p>and then 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 2</code></p>
+    <p>and finally 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver 10</code></p>
+  </li>
+  <li>Now we'll build the software with full compiler optimization. In the
+    remainder of the instructions, "<code>OPT</code>" is spelled with
+    Capital-letter O (Oh), <strong>not zero</strong>. "<code>=-O3</code>" is
+    spelled equal sign, hyphen, Capital-letter O and number 3. Optimization
+    options given to the compiler start with letter O, for Optimization!</li>
+  <li>Give the command <code>make OPT=-O3&nbsp;&nbsp;&nbsp;&nbsp;</code>and then: 
+    <p>run 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3 1 </code></p>
+    <p>and then 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3 2</code></p>
+    <p>and finally 3 times&nbsp;&nbsp;&nbsp;&nbsp;<code>time ./raceDriver-O3
+    10</code><code></code></p>
+  </li>
+  <li>Exit the script recorder with Control-<code>d</code></li>
+  <li>Q4A: Study the racer.s file (together with racer.c) and write into your
+    notebook the assembly language instructions that together work to add 1 to
+    the global variable <code>ring</code>.</li>
+  <li>Now, command <code>make config </code>and follow the directions to
+    COMMENT OUT whole <code>#define </code>line.<code></code></li>
+  <li>Run <code>make </code>(you will be asked to run make OPT=-O3 again when
+    you repeat step 10).</li>
+  <li>Start A DIFFERENT SCRIPT RECORD with the command: <code>script
+    nonvolatile.results</code></li>
+  <li>Repeat steps 8 and 9 and 10.</li>
+  <li>Questions now:</li>
+  <li>Q4B: Study the <code>racer.s</code> file (together with racer.c) and
+    write into your notebook the assembly language instructions that together
+    work to add 1 to the global variable <code>ring</code>.</li>
+  <li>Q5: Study the <code>racer-O3.s</code> file to figure out why the
+    optimized, non-volatile version was (A) so fast and (B) showed no errors at
+    all because of the race condition. (C) How did the optimizing compiler make
+    the computer add 1 to <code>ring</code> 20 million times?</li>
+  <li>Q6: List in your notebook the C-functions that were used in racedriver.c
+    to deal with pthreads. Do some web searching and write in your notebook
+    where you can learn exactly how to use those functions, together with
+    <code>pthread_mutex_init</code>, <code>pthread_mutex_lock</code> and
+    <code>pthread_mutex_unlock</code></li>
+  <li>Q7: Read the comments at the top of the <code>Makefile</code> you got,
+    and then skim the rest of its contents. Do some web searching and write in
+    your notebook where one can learn exactly what the concepts
+    <strong>target</strong>, <strong>dependency</strong> and
+    <strong>command</strong> mean in the context of a <strong>rule</strong>
+    that would be in a Makefile. </li>
+  <li>HOMEWORK: Remove the race condition by using a pthreads mutex. Verify
+    that all the counting is consistant. Experiment and report how the
+    performance is different between the program that suffers from races and
+    the error-free program. (Due date and submission to be announced). 
+    <p style="font-size: 8pt">(revised 9/4/2012)</p>
+  </li>
+</ol>
+
+
+</body></html>
