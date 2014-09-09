@@ -5,13 +5,15 @@
 #     This will check the up-to-dateness of each dependency.
 #     Those that are updated are recorded as YOUNGER than the TARGET.
 # (2) If the TARGET file is missing or one or more dependency is 
-#     YOUNGER than the TARGET, then the COMMANDS (on tabbed lines below)
-#     are performed.
-# (3) Often, the COMMANDS recreate the TARGET.  $@ within a command
+#     YOUNGER than the TARGET, then the RECIPE of COMMANDS 
+#     (on tabbed lines below)  are performed.
+# (3) Often, the RECIPE recreates the TARGET.  $@ within a command
 #     evaluates to the TARGET (name).  
-# (4) Sometime, the COMMANDS don't recreate the TARGET.  Makefile
+# (4) Sometime, the RECIPE doen't recreate the TARGET.  Makefile
 #     programmers write such commands so "make TARGET" executes the
-#     commands ALWAYS.  Examples: make config and make help
+#     commands ALWAYS.  Examples: make config and make help  Such
+#     targets, which do not name files to be made, should be declared
+#     .PHONEY in a special dependency. 
 #
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -63,7 +65,7 @@ help:
 	@echo '    Linux kernel builds, roughly.'
 	@echo 'make clean to remove machine built and backup files'
 
-.phony: clean help config 
+.PHONY: clean help config 
 
 clean:
 	rm -f *.o *.s *~ raceDriver raceDriver-* *.bak config.h WasConfigured
