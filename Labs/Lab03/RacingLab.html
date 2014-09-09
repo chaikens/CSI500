@@ -16,8 +16,8 @@
     contain our CSI500 git repository which you started with <code><strong>git
     clone git@github.com:chaikens/CSI500</strong></code>, and which you added
     to during previous labs. Do the command below: 
-    <p><pre><strong>git pull origin master</strong></pre>
-    </p>
+    <p></p>
+    <pre><strong>git pull origin master</strong></pre>
     <p>A text editor might take over your terminal window with a comment about
     this being a merge. Just exit the editor. By default it will be the vi
     editor, and the commands to simply exit without changing any text are
@@ -36,6 +36,8 @@
     named<code><strong>files_before_making</strong></code> and redirect the
     standard output file descriptor so it describes this disk file instead of
     the text terminal.) 
+    <p>Q1: Write in the file <code><strong>HW2Questions.txt</strong></code>
+    this list of files. </p>
     <p>We will ask you to report what new files are commanded to be made by the
     <code><strong>Makefile</strong></code>. You should only pay attention to
     the files at the top level of directory
@@ -53,8 +55,8 @@
     <code><strong>racer(</strong></code>ANYTHING<code><strong>);</strong></code>
     but rather its name is one argument in the POSIX call to create a thread
     and get it to run the <code><strong>racer</strong></code> loop.</p>
-    <p><pre><strong> pthread_create(&amp;threads[i], NULL, racer, (void *) i);</strong></pre>
-    </p>
+    <p></p>
+    <pre><strong> pthread_create(&amp;threads[i], NULL, racer, (void *) i);</strong></pre>
     <p style="margin-left:2em;"><span style="font-size: 10pt">Important C rule
     in kernel programming: The plain name of a function, with no ()'s, denotes
     the address of the first machine instruction of the function's body. In
@@ -70,80 +72,151 @@
   <li>Command: <code><strong>make config</strong></code> Leave the contents of
     the editor buffer unchanged by typing <code><strong>C-x</strong></code>
     Next, command: <code><strong>make </strong>(<strong>make
-    </strong></code>some kind of configuration followed by <code><strong>make
-    </strong></code>what you want is the common pattern that people who build
-    kernels do day-to-day.)</li>
-  <li>LAB Q1: Write in the file
-    <code><strong>Q1_files_just_made</strong></code> the names of the files
-    (top level only) made during the last step. Command: <code><strong>git add
-    Q1_files_just_made</strong></code> and <strong><code>git commit -m "Did the
-    first make and answered Q1"</code></strong> Finally, command:
-    <strong><code>git log -p</code></strong></li>
-  <li>LAB Q2: Write in file
-    <code><strong><code>Q2</code></strong></code><code><strong>_calling_raceDriver</strong></code>
+    </strong></code><strong><em>some configuration</em></strong> followed by
+    <code><strong>make </strong></code><em><strong>what you want</strong></em>
+    is the common pattern that people who build kernels do day-to-day.)</li>
+  <li>LAB Q2: Write in the file <code><strong>HW2Questions.txt</strong></code>
+    the names of the files (top level only) made during the last step. Command:
+    <code><strong>git add HW2Questions.txt </strong></code> and
+    <strong><code>git commit -m "Did the first make and answered
+    Q2"</code></strong> Finally, command: <strong><code>git log
+    -p</code></strong></li>
+  <li>LAB Q3: Write in file
+    <code><strong><code>HW2Questions.txt</code></strong></code><code><strong></strong></code>
     the failing condition that I programmed into
     <code><strong>raceDriver.c</strong></code> to make it print the error
     message that you saw. Git add and commit as usual.</li>
-</ol>
+  <li>At this point, we want you to use the remaining time to prepare and run
+    experiments so you'll have data to analyze for homework. The goal is to
+    compare running times and amounts of error due to race conditions for four
+    systematic variations. This table summarizes them: 
 
-<p>OLD TEXT IS BELOW..WILL BE REVISED BEFORE THE LAB BEGINS.</p>
-<ol>
-  <li>Run the new raceDriver program with .<code>/raceDriver</code> </li>
-  <li>Start the <code>script   </code>command by typing <code>script.</code>
-    <code> </code>Everything you see on the terminal window will be saved in a
-    file named <code>typescript</code> until you type <code>control-d
-    </code>That way, your experiments and their outputs will be in a file you
-    can study later and add to your lab report.<code></code></li>
-  <li>Now run 3 times    <code>time ./raceDriver 1</code> 
-    <p>and then 3 times    <code>time ./raceDriver 2</code></p>
-    <p>and finally 3 times    <code>time ./raceDriver 10</code></p>
+    <table border="1">
+      <caption></caption>
+      <col />
+      <col />
+      <tbody>
+        <tr>
+          <td><code><strong>raceDriver-</strong></code><br />
+            not optimized <code><strong>racer()</strong></code>. <br />
+            not <code><strong>volatile sharedInt</strong></code>.</td>
+          <td><code><strong>raceDriver-volatile</strong></code><br />
+            not optimized <code><strong>racer( )</strong></code>.<br />
+            <code><strong>volatile sharedInt</strong></code>.</td>
+        </tr>
+        <tr>
+          <td><code><strong>raceDriver--O3</strong></code><br />
+            <code><strong>-O3</strong></code> optimized
+            <code><strong>racer()</strong></code>.<br />
+            not <code><strong>volatile sharedInt</strong></code>.</td>
+          <td><code><strong>raceDriver-volatile-O3</strong></code><br />
+            <code><strong>-O3</strong></code> optimized <code><strong>racer(
+            )</strong></code>.<br />
+            <code><strong>volatile sharedInt</strong></code>.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
   </li>
-  <li>Now we'll build the software with full compiler optimization. In the
-    remainder of the instructions, "<code>OPT</code>" is spelled with
-    Capital-letter O (Oh), <strong>not zero</strong>. "<code>=-O3</code>" is
-    spelled equal sign, hyphen, Capital-letter O and number 3. Optimization
-    options given to the compiler start with letter O, for Optimization!</li>
-  <li>Give the command <code>make OPT=-O3    </code>and then: 
-    <p>run 3 times    <code>time ./raceDriver-O3 1 </code></p>
-    <p>and then 3 times    <code>time ./raceDriver-O3 2</code></p>
-    <p>and finally 3 times    <code>time ./raceDriver-O3
-    10</code><code></code></p>
+  <li>You build the three other executable files by, three times, the steps:
+    <br />
+    <code><strong>make config</strong></code>, <br />
+    edit the configuration setting as directed by the instructions written as
+    comments, <br />
+    save/exit, <br />
+    <code><strong>make</strong></code></li>
+  <li>Of course, confirm with <code><strong>ls -l raceDriver*</strong></code>
+    that you have ALL 4 executable files. It's a good idea to run them for a
+    preliminary test.</li>
+  <li>Read the explanations below, but don't do anything until you've
+    understood the goal and read how to do the scripting and data capture. <br
+    />
+    For each of the four software variations, we want you to do and time a
+    total of 9 runs, of course capturing in computer files what each run was,
+    what it printed, and the timing report: 
+    <p>run 3 times    <strong><code>time
+    ./raceDriver-</code></strong><em>VARIATION</em>     <strong><code>1
+    </code></strong></p>
+    <p>and then 3 times    <strong><code>time
+    ./raceDriver-</code></strong><em>VARIATION</em>    <strong><code>2
+    </code></strong></p>
+    <p>and finally 3 times    <strong><code>time
+    ./raceDriver-</code></strong><em>VARIATION</em>    <strong><code>10</code></strong></p>
+    <p>Yes, that is 36 runs altogether. What you must do is script them ahead
+    of time and make the computer record the results in a file. But, DON'T do
+    that with changing the C code at all.</p>
+    <p>Here is a "shell script" that commands two runs: </p>
+    <pre><strong>#!/bin/bash
+set -v  #This shell variable setting tells bash <br />      #to reprint each command before running it.
+echo  xxxx  #echo reprints its argument; good for nicer spacing.
+time ./raceDriver- 2
+echo xxxx
+time ./raceDriver- 2
+cat /proc/cpuinfo  #Record what the kernel found out about your CPU</strong></pre>
+    <p>Unlike a file of commands that tell <em>your interactive shell
+    process</em> to read and follow (with the
+    <strong><code>source</code></strong> command), a shell script in this form
+    will be followed by a <strong>SEPARATE shell process</strong>. This is good
+    here because you don't want the <strong><code>set -v</code></strong>
+    setting to mess up the shell you are interacting with.</p>
+    <p>To make the system run a separate process, you must, after saving the
+    script into a file like <strong><code>do-variation.sh</code></strong>
+    <strong>and then command:<code>chmod 755 do-variation.sh</code></strong>.
+    After the <strong><code>chmod</code></strong> command, do ls -l and see
+    that the file now has the protections
+    <strong><code>-rwx-r-xr-x</code></strong>. To make the system create a
+    process to run the script, just command:
+    <strong><code>./do-variation.sh</code></strong> </p>
+    <p>Finally, we must tell you how to make the printout GET RECORDED IN A
+    FILE. Here's how</p>
+    <ol>
+      <li>Command: <strong><code>script variation.record</code></strong><br />
+        Now everything you see including what you type is recorded in the file
+        named <strong><code>variation.record</code></strong>. </li>
+      <li>Command:<strong><code>./do-variation.sh</code></strong> </li>
+      <li>IMPORTANT: STOP the recording by typing type
+        <strong>Control-<code>d</code></strong><br />
+        Note and MEMORIZE: <strong>Control-<code>d</code></strong> tells the
+        keyboard input device to set the END-OF-FILE condition on the input
+        file. </li>
+      <li>Command: <code><strong>less variation.record</strong></code> to see
+        what you've captured.</li>
+      <li>Warning: If you run <code><strong>script</strong></code> with the
+        same record file, the old record contents will be lost. </li>
+    </ol>
+    <p><strong><span style="font-size: 16pt">Now, begin writing and using one
+    or more shell scripts</span></strong> to script the experiments, getting
+    help in lab etc. WHAT WILL COUNT in the grading is that you NAME the shell
+    scripts with names that INFORM you and others </p>
   </li>
-  <li>Exit the script recorder with Control-<code>d</code></li>
-  <li>Q4A: Study the racer.s file (together with racer.c) and write into your
-    notebook the assembly language instructions that together work to add 1 to
-    the global variable <code>sharedInt</code>.</li>
-  <li>Now, command <code>make config </code>and follow the directions to
-    COMMENT OUT whole <code>#define </code>line.<code></code></li>
-  <li>Run <code>make </code>(you will be asked to run make OPT=-O3 again when
-    you repeat step 10).</li>
-  <li>Start A DIFFERENT SCRIPT RECORD with the command: <code>script
-    nonvolatile.results</code></li>
-  <li>Repeat steps 8 and 9 and 10.</li>
-  <li>Questions now:</li>
-  <li>Q4B: Study the <code>racer.s</code> file (together with racer.c) and
-    write into your notebook the assembly language instructions that together
-    work to add 1 to the global variable <code>sharedInt</code>.</li>
-  <li>Q5: Study the <code>racer-O3.s</code> file to figure out why the
-    optimized, non-volatile version was (A) so fast and (B) showed no errors at
-    all because of the race condition. (C) How did the optimizing compiler make
-    the computer add 1 to <code>sharedInt</code> 20 million times?</li>
-  <li>Q6: List in your notebook the C-functions that were used in raceDriver.c
-    to deal with pthreads. Do some web searching and write in your notebook
-    where you can learn exactly how to use those functions, together with
-    <code>pthread_mutex_init</code>, <code>pthread_mutex_lock</code> and
-    <code>pthread_mutex_unlock</code></li>
-  <li>Q7: Read the comments at the top of the <code>Makefile</code> you got,
-    and then skim the rest of its contents. Do some web searching and write in
-    your notebook where one can learn exactly what the concepts
-    <strong>target</strong>, <strong>dependency</strong> and
-    <strong>command</strong> mean in the context of a <strong>rule</strong>
-    that would be in a Makefile. </li>
-  <li>HOMEWORK: Remove the race condition by using a pthreads mutex. Verify
-    that all the counting is consistant. Experiment and report how the
-    performance is different between the program that suffers from races and
-    the error-free program. (Due date and submission to be announced). 
-    <p style="font-size: 8pt">(revised 9/4/2012)</p>
+  <li><strong>Lab Followup Homework (DUE next week, assuming the channel for
+    pushing your CSI500 repository to our grading server is working):</strong>
+    After successfully getting, saving, and <code><strong>git
+    add/committ</strong></code>ing your experimental data, write a report about
+    the differences and similarities among the results from the four software
+    variations. Of course, <code><strong>git add</strong></code> and
+    <code><strong>git commit</strong></code> the report as you progress and
+    when you finish. Then answer the remaining questions (of course,
+    <code><strong>git add</strong></code> and
+    <code><strong>commit</strong></code> them too.)</li>
+  <li><a href="HW02Questions.txt">Lab Homework Questions: Answer in the text
+    file, git add it, git commit it for eventual grading.</a></li>
+  <li><strong>Proj2 Assignment:</strong> 
+    <ol>
+      <li>Make directory <code><strong>Projs/Proj2</strong></code> and copy the
+        source files from <strong><code>Labs/Lab03</code></strong> to
+        <code><strong>Projs/Proj2</strong></code> <br />
+        Make sure the copy builds ok, and then <code><strong>git
+        add</strong></code> and <code><strong>git commit</strong></code> the
+        source files in <code><strong>Projs/Proj2</strong></code></li>
+      <li>Just concentrate on the <strong><em>optimized-volatile</em></strong>
+        variation. Your job is to remove the race condition by using a pthreads
+        mutex. Verify that all the counting is consistant. Experiment and
+        report how the performance is different between the program that
+        suffers from races and the error-free program. git add and commit your
+        work. By the due date of Sept 24 we should have the channel for you to
+        push your CSI500 repository to the grading server operational. </li>
+    </ol>
   </li>
 </ol>
 </body>

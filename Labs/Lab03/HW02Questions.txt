@@ -1,0 +1,54 @@
+Q1: List the files directly under Lab03 you got from us:
+
+
+Q2: List the files that were made by the build 
+commanded by make (no arguments):
+
+
+Q3: What's the failing condition I programmed into raceDriver.c to 
+make it print the error message resulting from ./raceDriver-- (no arguments):
+
+
+Q4: Study the racer-.s file, which came from the no-optimization
+non-volatile case, and racer.c and write here the assembly language
+instructions that work together to add 1 to the global variable sharedInt.
+
+
+Q5: Study the racer--O3.s file to figure out why the optimized, non-volatile
+version was so fast and showed no errors at all because of the race
+condition. How did the optimizing compiler make the computer add 1 to
+sharedInt 20 million times?:
+
+
+Why were there no errors due to race conditions?:
+
+
+Q6: List in your notebook the C-functions that were used in raceDriver.c to
+deal with pthreads. Do some web searching and write notes here to record
+WHERE you can learn exactly how to use those functions, together with
+pthread_mutex_init, pthread_mutex_lock and pthread_mutex_unlock:
+
+
+
+Q7: Read the comments at the top of Makefile, and then skim the rest.
+A group of lines that has the form
+TARGETS  :  PREREQUISITES
+(tab)       RECIPE_line_1
+(tab)       RECIPE_line_2
+etc.  is called a RULE.
+Do some web searching and record here WHERE YOU CAN learn exactly 
+what the concepts TARGET, PREREQUISITE and RECIPE mean in the context of a 
+RULE that would be in a Makefile.  (In older documentation, PREREQUISTIES were
+called DEPENDENCIES and RECIPES were called COMMANDS.)
+
+
+
+Q8: Gnu make is a specific technology that is heavily used in the Linux kernel
+build system (called kbuild).  Was the Gnu make manual your first answer to
+the above question?  Anwser here yes or no, and if you browsed other resources,
+read http://www.gnu.org/software/make/manual/make.html#Rule-Example
+skim a little of the rest, and record here in 10-30 words your opinion
+of how the Gnu manual compares to your other resources on make: 
+
+
+
