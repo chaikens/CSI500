@@ -46,7 +46,7 @@ dot.config:  WasConfigured
 WasConfigured:
 
 config:
-	rm WasConfigured
+	rm -f WasConfigured
 	$(MAKE) dot.config
 
 config.h: dot.config
