@@ -16,7 +16,9 @@
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),help)
+ifneq ($(MAKECMDGOALS),config)
 include dot.config
+endif
 endif
 endif
 
