@@ -33,7 +33,7 @@ int main(int argc, char * argv[])
     }
   /* Now, all threads have exited. */
 
-  printf("ring=%d ideal=%d diff=%d reldiff=%e\n",
+  printf("sharedInt=%d ideal=%d diff=%d reldiff=%e\n",
 	 sharedInt, nLoops*nThreads, 
 	 sharedInt - nLoops*nThreads,
 	 ((float)(sharedInt - nLoops*nThreads))/(nLoops*nThreads)
