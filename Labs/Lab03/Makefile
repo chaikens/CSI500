@@ -14,7 +14,10 @@
 #     commands ALWAYS.  Examples: make config and make help
 #
 
+ifneq ($(MAKECMDGOALS),clean)
 include dot.config
+endif
+
 
 CONF=${CONFIG_VOLATILE}${CONFIG_OPT}
 
@@ -57,8 +60,8 @@ help:
 	@echo '    Linux kernel builds, roughly.'
 	@echo 'make clean to remove machine built and backup files'
 
+.phony: clean help config 
+
 clean:
 	rm -f *.o *.s *~ raceDriver raceDriver-* *.bak config.h WasConfigured
-
-.phony: clean help config 
 
